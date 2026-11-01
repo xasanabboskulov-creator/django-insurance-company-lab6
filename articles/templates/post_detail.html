@@ -1,0 +1,31 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }} — Страховая компания</title>
+    <link rel="stylesheet" href="{% static 'css/article.css' %}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>{{ post.title }}</h1>
+
+        <div class="post-content">
+            {{ post.text|linebreaks }}
+        </div>
+
+        <p class="author">
+            Автор: {{ post.author.username }}
+        </p>
+
+        <a href="{% url 'archive' %}" class="back-link">
+            Вернуться на главную страницу
+        </a>
+    </div>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from .models import Branch, Client, Agent, InsuranceType, Contract
+from .models import Branch, Client, Agent, InsuranceType, Contract, Article
 
 
 @admin.register(Branch)
@@ -44,3 +44,9 @@ class ContractAdmin(admin.ModelAdmin):
     @admin.display(description='Зарплата агента')
     def show_agent_salary(self, obj):
         return obj.agent_salary
+
+
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'author')
+    search_fields = ('title', 'text')
