@@ -5,17 +5,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Архив договоров страхования</title>
+    <title>Страховая компания</title>
     <link rel="stylesheet" href="{% static 'css/article.css' %}">
 </head>
 <body class="archive">
 
     <div class="header">
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <span>Пользователь: {{ user.username }}</span>
+                <a href="{% url 'logout' %}">Выйти</a>
+            {% else %}
+                <a href="{% url 'register' %}">Регистрация</a>
+                <a href="{% url 'login' %}">Войти</a>
+            {% endif %}
+        </div>
+
         <h1>Страховая компания</h1>
         <p>Архив договоров страхования</p>
     </div>
 
     <div class="archive-content">
+        <h2>Договоры страхования</h2>
+
         {% for contract in contracts %}
             <div class="post">
                 <h2 class="post-title">
@@ -33,6 +45,24 @@
         {% empty %}
             <p>Договоры страхования пока отсутствуют.</p>
         {% endfor %}
+
+        <h2>Публикации страховой компании</h2>
+
+        {% for article in articles %}
+            <div class="post">
+                <h2 class="post-title">
+                    <a href="{% url 'get_article' article.id %}">
+                        {{ article.title }}
+                    </a>
+                </h2>
+
+                <p>{{ article.text|truncatewords:30 }}</p>
+                <p><strong>Автор:</strong> {{ article.author.username }}</p>
+            </div>
+        {% empty %}
+            <p>Публикации пока отсутствуют.</p>
+        {% endfor %}
+
     </div>
 
 </body>

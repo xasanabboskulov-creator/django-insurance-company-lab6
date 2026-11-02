@@ -6,27 +6,18 @@ from articles import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # Главная страница со списком договоров и публикаций
+    # Главная страница
     path('', views.archive, name='archive'),
 
-    # Просмотр договора страхования
-    path(
-        'contract/<int:contract_id>/',
-        views.get_contract,
-        name='get_contract'
-    ),
+    # Просмотр договора
+    path('contract/<int:contract_id>/', views.get_contract, name='get_contract'),
 
-    # Создание новой публикации
-    path(
-        'article/new/',
-        views.create_post,
-        name='create_post'
-    ),
+    # Публикации страховой компании
+    path('article/new/', views.create_post, name='create_post'),
+    path('article/<int:article_id>/', views.get_article, name='get_article'),
 
-    # Просмотр отдельной публикации
-    path(
-        'article/<int:article_id>/',
-        views.get_article,
-        name='get_article'
-    ),
+    # Регистрация и авторизация
+    path('register/', views.register, name='register'),
+    path('login/', views.user_login, name='login'),
+    path('logout/', views.user_logout, name='logout'),
 ]

@@ -12,6 +12,17 @@
 <body>
 
     <div class="container">
+
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+                <span>Пользователь: {{ user.username }}</span>
+                <a href="{% url 'logout' %}">Выйти</a>
+            {% else %}
+                <a href="{% url 'register' %}">Регистрация</a>
+                <a href="{% url 'login' %}">Войти</a>
+            {% endif %}
+        </div>
+
         <h1>{{ post.title }}</h1>
 
         <div class="post-content">
